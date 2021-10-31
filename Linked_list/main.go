@@ -13,7 +13,7 @@ type LinkedList struct {
 	size int
 }
 
-func (l LinkedList) addToList(n *node) {
+func (l *LinkedList) addToList(n *node) {
 	if l.main == nil {
 		l.main = n
 	}
@@ -26,6 +26,12 @@ func (l LinkedList) addToList(n *node) {
 	l.tail.next = nil
 }
 
+func (l *LinkedList) pushBack(n *node) {
+	l.tail.next = n
+	l.tail = n
+	l.size++
+}
+
 func main() {
 	fmt.Println("Hello Linked List")
 	list := LinkedList{}
@@ -35,7 +41,18 @@ func main() {
 		}
 		list.addToList(&n)
 	}
+
 	fmt.Println(list.size)
-	var a int
-	fmt.Println(a)
+	fmt.Println(list.main.data)
+	fmt.Println(list.tail.data)
+
+	n := node{
+		data: 100,
+	}
+	list.pushBack(&n)
+
+	fmt.Println(list.size)
+	fmt.Println(list.main.data)
+	fmt.Println(list.tail.data)
+	fmt.Println(list.tail.next)
 }
